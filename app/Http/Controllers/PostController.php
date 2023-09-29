@@ -7,12 +7,23 @@ use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
+    // public function index()
+    // {
+    //     return view('posts.index', [
+    //         'posts' => Post::latest()->filter(
+    //                     request(['search', 'category', 'author'])
+    //                 )->paginate(18)->withQueryString()
+    //     ]);
+    // }
+
     public function index()
     {
         return view('posts.index', [
-            'posts' => Post::latest()->filter(
-                        request(['search', 'category', 'author'])
-                    )->paginate(18)->withQueryString()
+            'posts' => Post::latest()
+                ->filter(request(['search', 'category', 'author', 'tags']))
+                ->with('tags') // Eager load the 'tags' relationship
+                ->paginate(18)
+                ->withQueryString(),
         ]);
     }
 

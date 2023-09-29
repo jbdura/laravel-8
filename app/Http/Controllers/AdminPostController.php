@@ -19,12 +19,27 @@ class AdminPostController extends Controller
         return view('admin.posts.create');
     }
 
+    // public function store()
+    // {
+    //     Post::create(array_merge($this->validatePost(), [
+    //         'user_id' => request()->user()->id,
+    //         'thumbnail' => request()->file('thumbnail')->store('thumbnails')
+    //     ]));
+
+    //     return redirect('/');
+    // }
+
     public function store()
     {
-        Post::create(array_merge($this->validatePost(), [
+        // Create the post
+        $post = Post::create(array_merge($this->validatePost(), [
             'user_id' => request()->user()->id,
             'thumbnail' => request()->file('thumbnail')->store('thumbnails')
         ]));
+
+        // Attach tags to the post
+        $tags = request('tags'); // Assuming you have a 'tags' input field in your form.
+        $post->tags()->attach($tags);
 
         return redirect('/');
     }
@@ -43,6 +58,11 @@ class AdminPostController extends Controller
         }
 
         $post->update($attributes);
+
+        // Sync (attach/detach) tags for the post
+        $tags = request('tags'); // Assuming you have a 'tags' input field in your form.
+        $post->tags()->sync($tags);
+
 
         return back()->with('success', 'Post Updated!');
     }
