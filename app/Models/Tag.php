@@ -9,6 +9,7 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $guarded = []; // allow mass assignment
     public function posts()
     {
         return $this->belongsToMany(Post::class);

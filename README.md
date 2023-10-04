@@ -1,39 +1,74 @@
-# Laravel From Scratch Blog Demo Project
 
-http://laravelfromscratch.com
+## Learning Laravel 8
 
-## Installation
+  
+In this repository, I build a simple blog website using Laravel 8 with the guidance of [Laracast](https://laracasts.com/series/laravel-8-from-scratch). 
 
-First clone this repository, install the dependencies, and setup your .env file.
+[Laravel](https://laravel.com/) is a popular open-source PHP web framework known for its elegant syntax and powerful features, simplifying and speeding up the development of web applications by providing a robust set of tools and utilities. 
 
-```
-git clone git@github.com:JeffreyWay/Laravel-From-Scratch-Blog-Project.git blog
+[Eloquent](https://laravel.com/docs/5.0/eloquent) is the built-in ORM (Object-Relational Mapping) in Laravel, which allows developers to interact with the database using object-oriented syntax, making database querying and manipulation more intuitive and convenient. It provides an expressive and fluent API to handle database operations and relationships between models.
+
+[Composer](https://getcomposer.org/) is a dependency management tool for PHP that simplifies the process of installing and managing external libraries and packages required by a PHP project. It uses a `composer.json` file to define project dependencies and their versions, automatically resolving and downloading them from Packagist, the default PHP package repository.
+
+
+## Usage
+
+After cloning this repository, in the root directory run the following commands:
+
+1. to install composer dependencies: 
+
+```bash
 composer install
+```
+
+2. to install NPM dependencies: 
+
+```bash
+npm install
+```
+
+3. create a copy of your .env file:
+
+```bash
 cp .env.example .env
 ```
 
-Then create the necessary database.
+4. generate an app encryption key
 
-```
-php artisan db
-create database blog
-```
-
-And run the initial migrations and seeders.
-
-```
-php artisan migrate --seed
+```bash
+php artisan key:generate
 ```
 
-## Further Ideas
+5. create an empty database for your application and add the configurations to the .env file.
+6. run the database migrations:
 
-Of course we only had time in the Laravel From Scratch series to review the essentials of a blogging platform. You can certainly take this many 
-steps further. Here are some quick ideas that you might play with.
+```bash
+php artisan migrate
+```
 
-1. Add a `status` column to the posts table to allow for posts that are still in a "draft" state. Only when this status is changed to "published" should they show up in the blog feed. 
-2. Update the "Edit Post" page in the admin section to allow for changing the author of a post.
-3. Add an RSS feed that lists all posts in chronological order.
-4. Record/Track and display the "views_count" for each post.
-5. Allow registered users to "follow" certain authors. When they publish a new post, an email should be delivered to all followers.
-6. Allow registered users to "bookmark" certain posts that they enjoyed. Then display their bookmarks in a corresponding settings page.
-7. Add an account page to update your username and upload an avatar for your profile.
+7. seed the database:
+
+```bash
+php artisan db:seed
+```
+
+you can also run step 6 and 7 together with the following command to make migrations and seed the database at once:
+
+```bash
+php artisan migrate:fresh --seed                  
+```
+
+8. start a local server:
+
+```bash
+php artisan serve
+```
+
+9. to bundle assets ie **tailwindCSS**:
+
+```bash
+npm run dev
+```
+
+Proceed to [localhost:8000](http://localhost:8000/)
+
